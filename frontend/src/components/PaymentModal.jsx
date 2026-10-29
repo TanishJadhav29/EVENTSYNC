@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { X, CheckCircle, Shield, CreditCard, Receipt, DollarSign, Calendar } from 'lucide-react';
+import { X, Shield, CreditCard, Receipt } from 'lucide-react';
 import { recordPayment, confirmWaitlistOffer } from '../api';
+
 
 export default function PaymentModal({ booking, onClose, onSuccess, isWaitlistOffer = false }) {
   const [loading, setLoading] = useState(false);

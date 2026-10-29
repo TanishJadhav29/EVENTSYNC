@@ -1,19 +1,12 @@
 import React from 'react';
 import {
-  Layers,
-  ShieldCheck,
   Clock,
   Cpu,
-  CheckCircle2,
   ArrowRight,
-  Building,
-  Users,
-  Video,
-  Mic,
-  CalendarCheck,
-  TrendingUp,
+  ShieldCheck,
   AlertCircle
 } from 'lucide-react';
+
 
 export default function LandingPage({ setCurrentView, venues }) {
   return (
@@ -106,11 +99,12 @@ export default function LandingPage({ setCurrentView, venues }) {
               </div>
               <h3 className="text-lg font-semibold text-white">30-Min Temporal Buffers</h3>
               <p className="mt-2 text-xs text-slate-400 leading-relaxed">
-                Every booking $[T_{start}, T_{end}]$ automatically locks the physical hall and shared venue equipment from $[T_{start}-30m, T_{end}+30m]$, ensuring technical teardown and catering turnover.
+                Every booking [T_start, T_end] automatically locks the physical hall and shared venue equipment from [T_start - 30m, T_end + 30m], ensuring technical teardown and catering turnover.
               </p>
               <div className="mt-4 pt-4 border-t border-white/5 flex items-center gap-2 text-xs text-emerald-400 font-mono">
                 <code>R_start = T_start - 30m</code>
               </div>
+
             </div>
 
             <div className="p-6 rounded-xl bg-[#1E293B] border border-white/10 hover:border-emerald-500/30 transition">

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Play, RotateCcw, AlertTriangle, CheckCircle2, Zap, ArrowRight, ShieldCheck } from 'lucide-react';
+import { RotateCcw, AlertTriangle, Zap, ArrowRight } from 'lucide-react';
 import { runPresetStep1, runPresetStep2, runPresetStep3, runPresetStep4, resetDatabase } from '../api';
+
 
 export default function PresetScenarioBar({ onRefresh, onNotify }) {
   const [loading, setLoading] = useState(false);

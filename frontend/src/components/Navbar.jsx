@@ -1,5 +1,6 @@
 import React from 'react';
-import { Layers, Shield, User, Building2, Calendar, Bell, Clock, ChevronDown } from 'lucide-react';
+import { Layers, Shield, User, Building2, Calendar, Clock } from 'lucide-react';
+
 
 export default function Navbar({
   currentView,

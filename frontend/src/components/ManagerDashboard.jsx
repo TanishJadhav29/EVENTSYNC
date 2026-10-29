@@ -1,22 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Shield,
-  Layers,
   Clock,
-  AlertTriangle,
   Building,
   Plus,
   GitMerge,
-  Cpu,
-  CheckCircle2,
   ListOrdered,
   Sparkles,
-  Calendar,
   Activity,
-  ArrowRight,
-  RefreshCw,
-  Trash2
+  RefreshCw
 } from 'lucide-react';
+
 import {
   getTimelineData,
   getDecisionTraces,

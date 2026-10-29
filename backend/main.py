@@ -4,10 +4,11 @@ from decimal import Decimal
 from typing import Any, Dict, List, Optional
 import uuid
 
-from fastapi import Depends, FastAPI, HTTPException, Query, status
+from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
+
 
 try:
     from database import (

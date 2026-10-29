@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Building2, Search, SlidersHorizontal, Check, Wind, Users, Video, Mic, ArrowRight } from 'lucide-react';
+import { Building2, Search, ArrowRight } from 'lucide-react';
+
 
 export default function VenueDirectory({ venues, onSelectVenueForBooking }) {
   const [search, setSearch] = useState('');

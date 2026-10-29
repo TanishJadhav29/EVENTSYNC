@@ -1,22 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import {
   Calendar,
-  Clock,
-  Users,
   Plus,
-  Video,
-  Mic,
-  UserCheck,
   AlertTriangle,
   CheckCircle2,
   XCircle,
-  HelpCircle,
   CreditCard,
-  Building,
-  RotateCcw,
-  Sparkles,
-  Info
+  Sparkles
 } from 'lucide-react';
+
 import { createBooking, prevalidateBooking, cancelBooking } from '../api';
 import PaymentModal from './PaymentModal';
 
