@@ -38,7 +38,13 @@ export default function ManagerDashboard({
   const [loading, setLoading] = useState(false);
 
   // Filter venue for Gantt
-  const [selectedVenueId, setSelectedVenueId] = useState(venues[0]?.id || '');
+  const [selectedVenueId, setSelectedVenueId] = useState(venues?.[0]?.id || '');
+
+  useEffect(() => {
+    if (!selectedVenueId && venues && venues.length > 0) {
+      setSelectedVenueId(venues[0].id);
+    }
+  }, [venues, selectedVenueId]);
 
   // Add Venue Form Modal
   const [showAddVenue, setShowAddVenue] = useState(false);
@@ -268,9 +274,9 @@ export default function ManagerDashboard({
                 onChange={(e) => setSelectedVenueId(e.target.value)}
                 className="px-3 py-1.5 rounded-lg bg-[#0B0F17] border border-white/10 text-xs text-white focus:outline-none focus:border-emerald-500"
               >
-                {venues.map((v) => (
+                {(venues || []).map((v) => (
                   <option key={v.id} value={v.id}>
-                    {v.name} ({v.halls.map((h) => h.name).join(', ')})
+                    {v.name} ({((v.halls || []).map((h) => h.name)).join(', ') || 'No halls'})
                   </option>
                 ))}
               </select>
@@ -309,9 +315,10 @@ export default function ManagerDashboard({
 
               {/* Hall Rows */}
               <div className="mt-4 space-y-6">
-                {currentVenue?.halls.map((hall) => {
+                {(currentVenue?.halls || []).map((hall) => {
                   // Find all items for this hall
                   const hallItems = timelineItems.filter((i) => i.hall_name === hall.name);
+
 
                   return (
                     <div key={hall.id} className="space-y-2">

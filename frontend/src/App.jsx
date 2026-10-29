@@ -35,8 +35,52 @@ const MOCK_USERS = [
   }
 ];
 
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+  componentDidCatch(error, errorInfo) {
+    console.error("ErrorBoundary caught an error:", error, errorInfo);
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen bg-[#0B0F17] text-white p-8 flex items-center justify-center">
+          <div className="max-w-lg p-6 bg-[#1E293B] border border-red-500/30 rounded-xl space-y-4 shadow-2xl">
+            <h2 className="text-lg font-bold text-red-400">Application Rendering Alert</h2>
+            <p className="text-xs text-slate-300 font-mono bg-black/50 p-3 rounded">{this.state.error?.toString()}</p>
+            <button
+              onClick={() => {
+                this.setState({ hasError: false, error: null });
+                window.location.reload();
+              }}
+              className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded-lg text-xs font-semibold text-white transition"
+            >
+              Reload Page
+            </button>
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 export default function App() {
+  return (
+    <ErrorBoundary>
+      <MainApp />
+    </ErrorBoundary>
+  );
+}
+
+function MainApp() {
   const [currentView, setCurrentView] = useState('landing'); // 'landing', 'client', 'manager', 'venues'
+
   const [currentUser, setCurrentUser] = useState(MOCK_USERS[0]);
   const [venues, setVenues] = useState([]);
   const [bookings, setBookings] = useState([]);

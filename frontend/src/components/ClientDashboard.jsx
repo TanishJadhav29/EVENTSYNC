@@ -37,9 +37,14 @@ export default function ClientDashboard({
   const [attendees, setAttendees] = useState(100);
   const [eventDate, setEventDate] = useState(new Date().toISOString().split('T')[0]);
   const [startTime, setStartTime] = useState('10:00');
-  const [endTime, setEndTime] = useState('13:00');
-  const [preferredVenueId, setPreferredVenueId] = useState(venues[0]?.id || '');
-  const [projectors, setProjectors] = useState(1);
+  const [preferredVenueId, setPreferredVenueId] = useState(venues?.[0]?.id || '');
+
+  useEffect(() => {
+    if (!preferredVenueId && venues && venues.length > 0) {
+      setPreferredVenueId(venues[0].id);
+    }
+  }, [venues, preferredVenueId]);
+
   const [audio, setAudio] = useState(1);
   const [staff, setStaff] = useState(2);
   const [strictPreference, setStrictPreference] = useState(true);

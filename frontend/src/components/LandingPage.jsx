@@ -162,17 +162,17 @@ export default function LandingPage({ setCurrentView, venues }) {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            {venues.slice(0, 3).map((v) => {
-              const totalCap = v.halls.reduce((acc, h) => acc + h.capacity, 0);
-              const maxStaff = v.resources.find((r) => r.resource_type === 'staff')?.total_quantity || 0;
-              const maxProj = v.resources.find((r) => r.resource_type === 'projector')?.total_quantity || 0;
-              const maxAudio = v.resources.find((r) => r.resource_type === 'audio_system')?.total_quantity || 0;
+            {(venues || []).slice(0, 3).map((v) => {
+              const totalCap = (v.halls || []).reduce((acc, h) => acc + h.capacity, 0);
+              const maxStaff = (v.resources || []).find((r) => r.resource_type === 'staff')?.total_quantity || 0;
+              const maxProj = (v.resources || []).find((r) => r.resource_type === 'projector')?.total_quantity || 0;
+              const maxAudio = (v.resources || []).find((r) => r.resource_type === 'audio_system')?.total_quantity || 0;
 
               return (
                 <div key={v.id} className="rounded-xl overflow-hidden bg-[#1E293B] border border-white/10 flex flex-col group">
                   <div className="h-48 overflow-hidden relative">
                     <img
-                      src={v.image_url}
+                      src={v.image_url || "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80"}
                       alt={v.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                     />
@@ -192,7 +192,7 @@ export default function LandingPage({ setCurrentView, venues }) {
                         <div className="flex items-center justify-between text-[11px] pb-1 border-b border-white/5">
                           <span className="text-slate-400">Available Halls:</span>
                           <span className="font-semibold text-white">
-                            {v.halls.map((h) => `${h.name} (${h.capacity}p)`).join(', ')}
+                            {(v.halls || []).map((h) => `${h.name} (${h.capacity}p)`).join(', ') || 'Configuring halls...'}
                           </span>
                         </div>
                         <div className="flex items-center justify-between text-[11px] pb-1 border-b border-white/5">

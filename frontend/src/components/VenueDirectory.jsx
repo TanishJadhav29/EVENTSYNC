@@ -14,11 +14,12 @@ export default function VenueDirectory({ venues, onSelectVenueForBooking }) {
 
     const matchesAc = filterAc === 'ALL' || (filterAc === 'AC' ? v.has_ac : !v.has_ac);
 
-    const totalCap = v.halls.reduce((sum, h) => sum + h.capacity, 0);
+    const totalCap = (v.halls || []).reduce((sum, h) => sum + h.capacity, 0);
     const matchesCap = totalCap >= minCapacity;
 
     return matchesSearch && matchesAc && matchesCap;
   });
+
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
@@ -70,11 +71,11 @@ export default function VenueDirectory({ venues, onSelectVenueForBooking }) {
 
       {/* Venues Grid */}
       <div className="grid md:grid-cols-3 gap-6">
-        {filteredVenues.map((v) => {
-          const totalCap = v.halls.reduce((sum, h) => sum + h.capacity, 0);
-          const maxStaff = v.resources.find((r) => r.resource_type === 'staff')?.total_quantity || 0;
-          const maxProj = v.resources.find((r) => r.resource_type === 'projector')?.total_quantity || 0;
-          const maxAudio = v.resources.find((r) => r.resource_type === 'audio_system')?.total_quantity || 0;
+        {(filteredVenues || []).map((v) => {
+          const totalCap = (v.halls || []).reduce((sum, h) => sum + h.capacity, 0);
+          const maxStaff = (v.resources || []).find((r) => r.resource_type === 'staff')?.total_quantity || 0;
+          const maxProj = (v.resources || []).find((r) => r.resource_type === 'projector')?.total_quantity || 0;
+          const maxAudio = (v.resources || []).find((r) => r.resource_type === 'audio_system')?.total_quantity || 0;
 
           return (
             <div
@@ -84,7 +85,7 @@ export default function VenueDirectory({ venues, onSelectVenueForBooking }) {
               <div>
                 <div className="h-44 overflow-hidden relative">
                   <img
-                    src={v.image_url}
+                    src={v.image_url || "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80"}
                     alt={v.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                   />
@@ -107,7 +108,7 @@ export default function VenueDirectory({ venues, onSelectVenueForBooking }) {
                     <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block">
                       Individual Halls:
                     </span>
-                    {v.halls.map((h) => (
+                    {(v.halls || []).map((h) => (
                       <div
                         key={h.id}
                         className="flex items-center justify-between px-2.5 py-1.5 rounded bg-[#0B0F17] border border-white/5 text-[11px]"
@@ -117,6 +118,7 @@ export default function VenueDirectory({ venues, onSelectVenueForBooking }) {
                       </div>
                     ))}
                   </div>
+
 
                   {/* Resource Inventory */}
                   <div className="pt-3 border-t border-white/5 space-y-1 text-xs">
