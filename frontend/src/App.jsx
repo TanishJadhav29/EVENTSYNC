@@ -5,7 +5,9 @@ import LandingPage from './components/LandingPage';
 import ClientDashboard from './components/ClientDashboard';
 import ManagerDashboard from './components/ManagerDashboard';
 import VenueDirectory from './components/VenueDirectory';
+import AuthPortal from './components/AuthPortal';
 import { getVenues, getBookings } from './api';
+
 import { CheckCircle2, AlertTriangle, Info, X } from 'lucide-react';
 
 const MOCK_USERS = [
@@ -187,7 +189,17 @@ function MainApp() {
             }}
           />
         )}
+
+        {currentView === 'auth' && (
+          <AuthPortal
+            users={MOCK_USERS}
+            currentUser={currentUser}
+            onSelectUser={setCurrentUser}
+            onEnterPortal={(targetView) => setCurrentView(targetView)}
+          />
+        )}
       </main>
+
     </div>
   );
 }

@@ -894,7 +894,9 @@ def list_bookings(
 
 
 @app.post("/api/bookings/{booking_id}/cancel")
+@app.put("/api/bookings/{booking_id}/cancel")
 def cancel_booking(booking_id: str, db: Session = Depends(get_db)):
+
     """
     Cancels an active booking and immediately invokes process_waitlist_queue(venue_id)
     to fill the gap with the highest-priority waitlisted candidate.
@@ -1114,7 +1116,9 @@ def get_decision_traces(db: Session = Depends(get_db)):
 
 
 @app.get("/api/waitlist/queue")
+@app.get("/api/waitlist")
 def get_waitlist_queue(db: Session = Depends(get_db)):
+
     """Returns real-time waitlist queue state with offer countdowns."""
     process_waitlist_queue(db)
 

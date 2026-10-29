@@ -78,6 +78,18 @@ export default function Navbar({
               <Building2 className="w-3.5 h-3.5" />
               <span>Venue Directory</span>
             </button>
+            <button
+              onClick={() => setCurrentView('auth')}
+              className={`px-3 py-1.5 rounded-md text-xs font-medium transition flex items-center gap-1.5 ${
+                currentView === 'auth'
+                  ? 'bg-slate-800 text-emerald-400 border border-emerald-500/30'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+              }`}
+            >
+              <User className="w-3.5 h-3.5" />
+              <span>Auth Portal</span>
+            </button>
+
           </nav>
         </div>
 
